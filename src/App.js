@@ -59,7 +59,7 @@ const reducer = (state, action) => {
         </section>
         <section className="comparisson">
             <p>Volumetric Weight: {volumetricWeight} KG Bruttoweight:{formData.weight} KG</p>
-            <h3>{volumetricWeight < formData.weight ? "You will be charged for the Bruttoweight" : "You will be charged for the Volumetric Weight"}</h3>
+            <h3>{volumetricWeight < formData.weight * formData.amount ? "You will be charged for the Bruttoweight" : "You will be charged for the Volumetric Weight"}</h3>
         </section>
     </div>
   )
