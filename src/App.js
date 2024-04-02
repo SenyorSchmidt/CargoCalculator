@@ -2,25 +2,30 @@ import './App.css';
 import {useReducer, useState} from "react";
 
 
+
 function App() { 
-  const [volumetricWeight, setVolumetricWeight] = useState(0);
+
   const [formData, setFormData] = useState({height: "", broadth: "", width: "", amount: "", weight: "0"})
 
+  const [volumetricWeight, setVolumetricWeight] = useState(0);
+  const [loadingFactor, setLoadingFactor] = useState(null);
+
   function landCalculator(height, broadth, width, amount) {
-    setVolumetricWeight( height * broadth * width * 333 * amount);
-  }
-
+      setVolumetricWeight( height * broadth * width * 333 * amount);
+    }
+  
   function seaCalculator(height, broadth, width, amount) {
-    setVolumetricWeight(height * broadth * width * amount);
-  }
-
+      setVolumetricWeight(height * broadth * width * amount);
+      setLoadingFactor ((formData.height * formData.broadth * formData.width)/(formData.weight / 1000));
+    }
+  
   function airCalculator(height, broadth, width, amount) {
-    setVolumetricWeight( height * broadth * width * 167 * amount);
-  }
-
+      setVolumetricWeight( height * broadth * width * 167 * amount);
+    }
+  
   function changeHandler(e) {
-    setFormData({...formData, [e.target.name]: e.target.value})
-  }
+      setFormData({...formData, [e.target.name]: e.target.value})
+    }
 
   function clearAll(){
     setFormData({...formData, height: "", broadth: "", width: "", amount: "", weight: "0"},
@@ -49,16 +54,17 @@ const reducer = (state, action) => {
         <button onClick={clearAll}>❌Clear all</button>
       </section>
       <section className="inputs">
-        <h3>Input in m/kg</h3>
+        <h3 className='headerInput'>Input in m/kg per piece</h3>
             <input type = "number" name="height" placeholder="height" value={formData.height} onChange={changeHandler}></input>
             <input type = "number" name="broadth" placeholder="broadth" value={formData.broadth} onChange={changeHandler}></input>
             <input type = "number" name="width" placeholder="width" value={formData.width} onChange={changeHandler}></input>
             <input type = "number" name="amount" placeholder="amount" value={formData.amount} onChange={changeHandler}></input>
             <input type = "number" name="weight" placeholder="weight" value={formData.weight} onChange={changeHandler}></input>
-            <p>Volumetric weight: {volumetricWeight} KG</p>
         </section>
         <section className="comparisson">
-            <p>Volumetric Weight: {volumetricWeight} KG Bruttoweight:{formData.weight} KG</p>
+            <p>Volumetric Weight: {volumetricWeight} </p>
+            <p>KG Bruttoweight:{formData.weight * formData.amount} KG</p> 
+            <p>Volume:{formData.height * formData.broadth * formData.width}m³</p>
             <h3>{volumetricWeight < formData.weight * formData.amount ? "You will be charged for the Bruttoweight" : "You will be charged for the Volumetric Weight"}</h3>
         </section>
     </div>
