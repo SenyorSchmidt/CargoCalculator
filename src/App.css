@@ -9,11 +9,9 @@ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .buttons{
-  border: 3px solid navy;
-  border-radius: 2em;
-  margin: auto;
-  width: fit-content;
+
   text-align: center;
+  background-color: navy;
 }
 
 button {
@@ -37,5 +35,11 @@ input{
 }
 
 .inputs {
-  padding-top: 2em;;
+  padding-top: 2em;
+  background-color: navy;
+}
+
+.headerInput{
+  background-color: navy;
+  color: white;
 }
